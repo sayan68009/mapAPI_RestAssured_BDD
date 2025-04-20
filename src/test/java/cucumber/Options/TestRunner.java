@@ -6,7 +6,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/java/features", glue = "stepDefinitions", dryRun = false)
+@CucumberOptions(features = "src/test/java/features", glue = "stepDefinitions", plugin = "json:target/jsonReports/cucumber-report.json", dryRun = false)
 public class TestRunner {
-	//tags = "@DeletePlace"
+	// tags = "@DeletePlace"
 }
