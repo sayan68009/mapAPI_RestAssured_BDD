@@ -2,23 +2,18 @@ package stepDefinitions;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.*;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.*;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
-import pojoClasses.AddPlace;
-import pojoClasses.Location;
 import resources.APIResources;
+import resources.ExcelUtil;
 import resources.TestDataBuild;
 import resources.Utils;
 
@@ -30,9 +25,10 @@ public class StepDefinition extends Utils {
 	TestDataBuild data = new TestDataBuild();
 	static String place_id;
 
-	@Given("add place payload with {string} {string} {string}")
-	public void add_place_payload_with(String name, String language, String address) throws IOException {
-		res = given().spec(requestSpecification()).body(data.addPlacPayload(name, language, address));
+	@Given("add place payload with excel data")
+	public void add_place_payload_with() throws IOException {
+		ArrayList<String> cellData = ExcelUtil.getData("RestAddPlace");
+		res = given().spec(requestSpecification()).body(data.addPlacPayload(cellData.get(1), cellData.get(2), cellData.get(3)));
 	}
 
 	@When("user calls {string} with {string} http request")

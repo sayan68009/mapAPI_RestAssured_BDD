@@ -2,7 +2,7 @@ Feature: Validate place API's
 
 @AddPlace @Regression
 Scenario Outline: Verify if place is being successfully added using AddPlaceAPI
-	Given add place payload with "<name>" "<language>" "<address>"
+	Given add place payload with excel data
 	When user calls "addPlaceAPI" with "POST" http request
 	Then the API call got success with status code 200
 	And "status" in response body is "OK"
@@ -10,7 +10,7 @@ Scenario Outline: Verify if place is being successfully added using AddPlaceAPI
 	And verify place_id created maps to "<name>" using "getPlaceAPI"
 Examples: 
 	|name    |language |address            |
-	|SHouse  |English  |World cross center |
+	|Shouse  |German  |Munich, Germany |
 #	|BBHouse |Spanish  |Sea cross center   |
 
 @DeletePlace @Regression
